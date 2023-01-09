@@ -1,0 +1,8 @@
+version: '3'
+services:
+  banking-api:
+    image: oscaralmgren/rest-banking-api-go-tutorial:0.1
+    environment:
+      - BANKING_API=v1
+    ports:
+      - "3000:3000"
