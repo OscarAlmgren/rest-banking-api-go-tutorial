@@ -8,7 +8,7 @@ import (
 
 // DTO (data transformation object)
 type Customer struct {
-	Name    string `json:"full_name"`
+	Name    string `json:"name" xml:"name" form:"name" query:"name"`
 	City    string `json:"city"`
 	Zipcode string `json:"zipcode"`
 }
@@ -25,4 +25,16 @@ func getAllCustomers(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, customers)
+}
+
+// e.GET("/customers/:id", getCustomer)
+func getCustomer(c echo.Context) error {
+	id := c.PathParam("id")
+	customer := Customer{id, "Stockholm", "12345"}
+	return c.JSON(http.StatusOK, customer)
+}
+
+// e.POST("/customers", createCustomer)
+func createCustomer(c echo.Context) error {
+	return c.String(http.StatusCreated, "Post create customer")
 }
