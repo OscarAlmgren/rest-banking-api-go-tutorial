@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-14T14:58:25.024Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="aEsmX_RNFLRnql_mjQw3" version="20.4.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-14T19:48:44.044Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="G-B1KYdxh2zAjZmOHRT_" version="20.4.2" type="github">
   <diagram id="X_MJfE2iepRukj55Rtnu" name="Sida-1">
     <mxGraphModel dx="1186" dy="658" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -34,8 +34,11 @@
         <mxCell id="eEUfNWt6TEhQI0FCxMa2-13" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;" vertex="1" parent="1">
           <mxGeometry x="190" y="680" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="eEUfNWt6TEhQI0FCxMa2-16" value="MariaDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;" vertex="1" parent="1">
+        <mxCell id="eEUfNWt6TEhQI0FCxMa2-16" value="MariaDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=default;labelBackgroundColor=#CCCCFF;labelBorderColor=default;" vertex="1" parent="1">
           <mxGeometry x="550" y="900" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="eEUfNWt6TEhQI0FCxMa2-20" value="&lt;div style=&quot;font-family: FiraCode-Retina, Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-weight: normal; font-size: 12px; line-height: 18px;&quot;&gt;&lt;div&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;CustomerHandler&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;CustomerService&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;&quot;&gt;CustomerRepository&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;CustomerRepositoryStub&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;fontSize=12;fontFamily=Helvetica;fontColor=default;labelBorderColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="260" y="990" width="173" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
