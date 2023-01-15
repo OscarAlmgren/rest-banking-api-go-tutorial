@@ -13,7 +13,7 @@ type Customer struct {
 // repository
 type CustomerRepository interface {
 	FindAll() ([]Customer, error)
-	// FindCustomer(id int) (Customer, error)
+	FindCustomerById(id string) (Customer, error)
 	// UpdateCustomer(id int) (Customer, error)
 	// DeleteCustomer(id int) (Customer, error)
 }
