@@ -1,8 +1,22 @@
 version: '3'
 services:
-  banking-api:
-    image: oscaralmgren/rest-banking-api-go-tutorial:0.1
+  # banking-api:
+  #   image: oscaralmgren/rest-banking-api-go-tutorial:0.22
+  #   environment:
+  #     - BANKING_API=v1
+  #   ports:
+  #     - "3000:3000"
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:5.7.40-debian
+    ports: 
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql:rw
+      - ./initdb:/docker-entrypoint-initdb.d:ro
     environment:
-      - BANKING_API=v1
-    ports:
-      - "3000:3000"
+      - MYSQL_ROOT_PASSWORD=oscar-camp-tutorial
+    
+volumes:
+  mysqldata:
+    driver: local
