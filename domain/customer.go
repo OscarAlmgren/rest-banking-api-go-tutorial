@@ -6,8 +6,8 @@ type Customer struct {
 	Name        string `json:"name"`
 	City        string `json:"city"`
 	Zipcode     string `json:"zipcode"`
-	DateofBirth string
-	Status      string
+	DateofBirth string `json:"date_of_birth"`
+	Status      string `json:"status"`
 }
 
 // repository
