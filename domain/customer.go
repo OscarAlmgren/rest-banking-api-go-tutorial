@@ -10,7 +10,7 @@ type Customer struct {
 	Status      string `json:"status"`
 }
 
-// repository
+// repository secondary port interface
 type CustomerRepository interface {
 	FindAll() ([]Customer, error)
 	FindCustomerById(id string) (Customer, error)
