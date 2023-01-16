@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"database/sql"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,8 +13,19 @@ type CustomerRepositoryDb struct {
 }
 
 // FindCustomerById implements CustomerRepository
-func (CustomerRepositoryDb) FindCustomerById(id string) (Customer, error) {
-	panic("unimplemented")
+func (d CustomerRepositoryDb) FindCustomerById(id string) (*Customer, error) {
+	var c Customer
+	customerFindSql := "SELECT customer_id as id, name, date_of_birth as dateofbirth, city, zipcode, status FROM customers WHERE customer_id = ?"
+
+	err := d.client.Get(&c, customerFindSql, id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, err
+		} else {
+			return nil, err
+		}
+	}
+	return &c, nil
 }
 
 func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
@@ -38,9 +50,6 @@ func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
 	return customers, nil
 }
 
-// func (d CustomerRepositoryDb) FindCustomerById(id string) (Customer, error) {
-
-// }
 func NewCustomerRepositoryDb() CustomerRepositoryDb {
 	// return CustomerRepositoryDb{client: dbClient}  dbClient *sql.DB
 	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.5:3306)/banking")
