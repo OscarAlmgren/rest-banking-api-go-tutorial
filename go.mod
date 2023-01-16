@@ -4,7 +4,7 @@ go 1.19
 
 require github.com/labstack/echo/v5 v5.0.0-20220717203827-74022662be4a
 
-require github.com/go-sql-driver/mysql v1.7.0 // indirect
+require github.com/go-sql-driver/mysql v1.7.0
 
 require (
 	github.com/jmoiron/sqlx v1.3.5
