@@ -16,7 +16,7 @@ func Start() {
 	e.Use(middleware.Recover())
 	e.GET("/", rootGetHandler)
 
-	ch := CustomerHandler{service.NewCustomerService(domain.NewCustomerRepositoryStub())}
+	ch := CustomerHandler{service.NewCustomerService(domain.NewCustomerRepositoryDb())}
 	// customers endpoint
 	e.GET("/customers", ch.getAllCustomers)
 	e.POST("/customers", createCustomer)
