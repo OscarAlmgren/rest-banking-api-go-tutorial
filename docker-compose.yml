@@ -1,11 +1,12 @@
 version: '3'
 services:
-  # banking-api:
-  #   image: oscaralmgren/rest-banking-api-go-tutorial:0.22
-  #   environment:
-  #     - BANKING_API=v1
-  #   ports:
-  #     - "3000:3000"
+  banking-api:
+    container_name: banking-api
+    image: oscaralmgren/rest-banking-api-go-tutorial:0.22
+    # environment:
+    #   - BANKING_API=v1
+    ports:
+      - "3000:3000"
   mysqldb:
     container_name: mysqldb
     image: mysql:5.7.40-debian
