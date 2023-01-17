@@ -7,6 +7,8 @@ services:
     #   - BANKING_API=v1
     ports:
       - "3000:3000"
+    networks:
+      - backend
   mysqldb:
     container_name: mysqldb
     image: mysql:5.7.40-debian
@@ -17,7 +19,12 @@ services:
       - ./initdb:/docker-entrypoint-initdb.d:ro
     environment:
       - MYSQL_ROOT_PASSWORD=oscar-camp-tutorial
+    networks:
+      - backend
     
 volumes:
   mysqldata:
     driver: local
+networks:
+  backend:
+    name: "banking-backend"
