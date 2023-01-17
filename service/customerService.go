@@ -5,9 +5,10 @@ import "github.com/oscaralmgren/rest-banking-api-go-tutorial/domain"
 // service - primary port
 type CustomerService interface {
 	GetAllCustomers() ([]domain.Customer, error)
-	GetCustomerById(id string) (*domain.Customer, error)
+	GetCustomerById(string) (*domain.Customer, error) // use *pointer to be able to return "nil customer"
 }
 
+// DefaultCustomerService service connects the domain as a struct property
 type DefaultCustomerService struct {
 	repo domain.CustomerRepository
 }

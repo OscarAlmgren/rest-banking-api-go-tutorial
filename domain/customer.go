@@ -13,7 +13,7 @@ type Customer struct {
 // repository secondary port interface
 type CustomerRepository interface {
 	FindAll() ([]Customer, error)
-	FindCustomerById(id string) (*Customer, error)
+	FindCustomerById(string) (*Customer, error) // use *pointer to be able to return "nil customer"
 	// UpdateCustomer(id int) (Customer, error)
 	// DeleteCustomer(id int) (Customer, error)
 }
