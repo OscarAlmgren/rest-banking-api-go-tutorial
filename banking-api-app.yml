@@ -26,3 +26,16 @@ spec:
             requests:
               cpu: "125m"
               memory: "16M"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: banking-api-service
+spec:
+  type: NodePort
+  selector:
+    app: banking-api
+  ports:
+  - port: 8080
+    targetPort: 3000
+    # nodePort: 30007
