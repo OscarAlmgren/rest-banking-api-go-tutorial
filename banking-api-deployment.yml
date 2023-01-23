@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-api-deployment
+  labels:
+    app: banking-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banking-api
+  template:
+    metadata:
+      labels:
+        app: banking-api
+    spec:
+      containers:
+        - name: banking-api
+          image: oscaralmgren/rest-banking-api-go-tutorial:0.22
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "250m"
+              memory: "64M"
+            requests:
+              cpu: "125m"
+              memory: "16M"
