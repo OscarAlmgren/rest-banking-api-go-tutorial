@@ -28,6 +28,7 @@ func (d CustomerRepositoryDb) FindCustomerById(id string) (*Customer, error) {
 	return &c, nil
 }
 
+// FindAll returns all customers from db
 func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
 
 	findAllSql := "SELECT `customer_id`, `name`, `date_of_birth`, `city`, `zipcode`, `status` FROM customers"
@@ -50,9 +51,39 @@ func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
 	return customers, nil
 }
 
+// DeleteCustomersById implements delete
+func (d CustomerRepositoryDb) DeleteCustomerById(id string) (int64, error) {
+	deleteCustomerSql := "DELETE FROM customers WHERE customer_id = ?"
+
+	sqlResult, err := d.client.Exec(deleteCustomerSql, id)
+	if err != nil {
+		return -1, err
+	}
+	rowsAffected, err := sqlResult.RowsAffected()
+	if err != nil {
+		return -1, err
+	}
+	return rowsAffected, nil
+}
+
+func (d CustomerRepositoryDb) Create(c Customer) (*Customer, error) {
+	createCustomerSql := "INSERT INTO customers (customer_id, name, date_of_birth, city, zipcode, status) VALUES (?,?,?,?,?,?)"
+
+	sqlInsert, err := d.client.Exec(createCustomerSql, c.Id, c.Name, c.DateofBirth, c.City, c.Zipcode, c.Status)
+	if err != nil {
+		return nil, err // sql insert error. Handle this better!
+	}
+	newId, err := sqlInsert.LastInsertId()
+	if err != nil {
+		return nil, err // some error, what can be caught here?
+	}
+	c.Id = int(newId)
+	return &c, nil
+}
+
 func NewCustomerRepositoryDb() CustomerRepositoryDb {
 	// return CustomerRepositoryDb{client: dbClient}  dbClient *sql.DB
-	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(mysqldb:3306)/banking")
+	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.5:3306)/banking")
 	if err != nil {
 		panic(err)
 	}

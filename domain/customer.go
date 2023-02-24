@@ -15,5 +15,6 @@ type CustomerRepository interface {
 	FindAll() ([]Customer, error)
 	FindCustomerById(string) (*Customer, error) // use *pointer to be able to return "nil customer"
 	// UpdateCustomer(id int) (Customer, error)
-	// DeleteCustomer(id int) (Customer, error)
+	DeleteCustomerById(id string) (int64, error) // delete customer, no customer returned, only iff error
+	Create(Customer) (*Customer, error)
 }

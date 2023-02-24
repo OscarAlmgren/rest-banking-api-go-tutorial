@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   banking-api:
     container_name: banking-api
@@ -21,7 +21,17 @@ services:
       - MYSQL_ROOT_PASSWORD=oscar-camp-tutorial
     networks:
       - backend
-    
+  mongo:
+    image: mongo:6.0.4-jammy
+    container_name: mongodb-banking
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: oscar-camp-tutorial
+    networks:
+      - backend    
 volumes:
   mysqldata:
     driver: local
