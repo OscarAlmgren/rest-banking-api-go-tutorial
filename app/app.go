@@ -5,7 +5,8 @@ import (
 
 	"github.com/labstack/echo/v5"
 	"github.com/labstack/echo/v5/middleware"
-	"github.com/oscaralmgren/rest-banking-api-go-tutorial/domain"
+	customer "github.com/oscaralmgren/rest-banking-api-go-tutorial/domain/customer"
+	sale "github.com/oscaralmgren/rest-banking-api-go-tutorial/domain/sale"
 	"github.com/oscaralmgren/rest-banking-api-go-tutorial/service"
 	"github.com/rs/zerolog/log"
 )
@@ -16,14 +17,14 @@ func Start() {
 	e.Use(middleware.Recover())
 	e.GET("/", rootGetHandler)
 
-	ch := CustomerHandler{service.NewCustomerService(domain.NewCustomerRepositoryDb())}
+	ch := CustomerHandler{service.NewCustomerService(customer.NewCustomerRepositoryDb())}
 	// customers endpoint
 	e.GET("/customers", ch.getAllCustomers)
 	e.POST("/customers", ch.create)
 	e.GET("/customers/:id", ch.getCustomerById)
 	e.DELETE("customers/:id", ch.deleteCustomerById)
 
-	sh := SaleHandler{service.NewSaleService(domain.NewSaleRepositoryDb())}
+	sh := SaleHandler{service.NewSaleService(sale.NewSaleRepositoryDb())}
 
 	e.GET("/sales/getOneSale", sh.getOneSale)
 

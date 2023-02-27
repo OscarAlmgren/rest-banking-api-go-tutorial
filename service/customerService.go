@@ -1,6 +1,6 @@
 package service
 
-import "github.com/oscaralmgren/rest-banking-api-go-tutorial/domain"
+import domain "github.com/oscaralmgren/rest-banking-api-go-tutorial/domain/customer"
 
 // service - primary port
 type CustomerService interface {
@@ -15,6 +15,11 @@ type DefaultCustomerService struct {
 	repo domain.CustomerRepository
 }
 
+func NewCustomerService(repositry domain.CustomerRepository) DefaultCustomerService {
+	return DefaultCustomerService{repositry}
+}
+
+// Interface implementations from here.
 func (s DefaultCustomerService) GetAllCustomers() ([]domain.Customer, error) {
 	return s.repo.FindAll()
 }
@@ -41,8 +46,4 @@ func (s DefaultCustomerService) Create(domain.Customer) (*domain.Customer, error
 	// TODO implementera den här anropas på rätt sätt
 
 	return c, nil
-}
-
-func NewCustomerService(repositry domain.CustomerRepository) DefaultCustomerService {
-	return DefaultCustomerService{repositry}
 }

@@ -8,7 +8,7 @@ import (
 )
 
 type SaleHandler struct {
-	service service.SalesService
+	service service.SaleService
 }
 
 // e.GET("/sales/getOne", getOneSale)
