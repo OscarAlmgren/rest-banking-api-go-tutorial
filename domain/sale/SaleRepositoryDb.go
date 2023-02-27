@@ -14,7 +14,7 @@ type SaleRepositoryDb struct {
 }
 
 func NewSaleRepositoryDb() SaleRepositoryDb {
-	clientOptions := options.Client().ApplyURI("mongodb://root:oscar-camp-tutorial@henrybook.lan:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true")
+	clientOptions := options.Client().ApplyURI("mongodb://root:oscar-camp-tutorial@192.168.205.5:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true")
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
