@@ -13,6 +13,23 @@ type SaleRepositoryDb struct {
 	client *mongo.Client
 }
 
+func NewSaleRepositoryDb() SaleRepositoryDb {
+	clientOptions := options.Client().ApplyURI("mongodb://root:oscar-camp-tutorial@henrybook.lan:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true")
+
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		log.Fatal().Str("Error", err.Error()).Msg("MongoDB connect error.")
+	}
+
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal().Str("Error", err.Error()).Msg("MongoDB ping error.")
+	}
+
+	return SaleRepositoryDb{client: client}
+}
+
+// Interface implementations from here
 func (s SaleRepositoryDb) FindOne() (*Sale, error) {
 	var sale Sale
 
@@ -29,18 +46,19 @@ func (s SaleRepositoryDb) FindOne() (*Sale, error) {
 	return &sale, nil
 }
 
-func NewSaleRepositoryDb() SaleRepositoryDb {
-	clientOptions := options.Client().ApplyURI("mongodb://root:oscar-camp-tutorial@henrybook.lan:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true")
+func (s SaleRepositoryDb) FindAll() ([]Sale, error) {
+	var sales []Sale
 
-	client, err := mongo.Connect(context.TODO(), clientOptions)
+	collection := s.client.Database("banking-api").Collection("sales")
+	filter := bson.D{}
+	cursor, err := collection.Find(context.TODO(), filter)
 	if err != nil {
-		log.Fatal().Str("Error", err.Error()).Msg("MongoDB connect error.")
+		log.Error().Str("Error", err.Error()).Msg("FindAll error in MongoDB.")
+		return nil, err
+	}
+	if err = cursor.All(context.TODO(), &sales); err != nil { // loop cursor -> map each to one "sale"
+		log.Panic().Str("Error", err.Error()).Msg("Panic from FindAll cursor check")
 	}
 
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Fatal().Str("Error", err.Error()).Msg("MongoDB ping error.")
-	}
-
-	return SaleRepositoryDb{client: client}
+	return sales, nil
 }

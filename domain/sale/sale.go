@@ -11,4 +11,5 @@ type Sale struct {
 
 type SaleRepository interface {
 	FindOne() (*Sale, error)
+	FindAll() ([]Sale, error)
 }

@@ -27,6 +27,7 @@ func Start() {
 	sh := SaleHandler{service.NewSaleService(sale.NewSaleRepositoryDb())}
 
 	e.GET("/sales/getOneSale", sh.getOneSale)
+	e.GET("/sales", sh.getAllSales)
 
 	if err := e.Start(":3000"); err != http.ErrServerClosed {
 		log.Fatal().Str("Error", err.Error()).Msg("Server error on startup")

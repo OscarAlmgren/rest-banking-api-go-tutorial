@@ -19,3 +19,12 @@ func (sh *SaleHandler) getOneSale(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, sale)
 }
+
+// e.GET("/sales", getAllSales)
+func (sh *SaleHandler) getAllSales(c echo.Context) error {
+	sales, err := sh.service.FindAll()
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, sales)
+}
