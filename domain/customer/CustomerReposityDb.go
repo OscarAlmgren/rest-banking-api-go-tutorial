@@ -12,6 +12,19 @@ type CustomerRepositoryDb struct {
 	client *sqlx.DB
 }
 
+func NewCustomerRepositoryDb() CustomerRepositoryDb {
+	// return CustomerRepositoryDb{client: dbClient}  dbClient *sql.DB
+	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.5:3306)/banking")
+	if err != nil {
+		panic(err)
+	}
+
+	client.SetConnMaxIdleTime(time.Minute * 2)
+	client.SetMaxOpenConns(5)
+	client.SetMaxIdleConns(5)
+	return CustomerRepositoryDb{client: client}
+}
+
 // FindCustomerById implements CustomerRepository
 func (d CustomerRepositoryDb) FindCustomerById(id string) (*Customer, error) {
 	var c Customer
@@ -79,17 +92,4 @@ func (d CustomerRepositoryDb) Create(c Customer) (*Customer, error) {
 	}
 	c.Id = int(newId)
 	return &c, nil
-}
-
-func NewCustomerRepositoryDb() CustomerRepositoryDb {
-	// return CustomerRepositoryDb{client: dbClient}  dbClient *sql.DB
-	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.5:3306)/banking")
-	if err != nil {
-		panic(err)
-	}
-
-	client.SetConnMaxIdleTime(time.Minute * 2)
-	client.SetMaxOpenConns(5)
-	client.SetMaxIdleConns(5)
-	return CustomerRepositoryDb{client: client}
 }
