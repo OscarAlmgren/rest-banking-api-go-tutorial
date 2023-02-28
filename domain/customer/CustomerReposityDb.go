@@ -14,7 +14,7 @@ type CustomerRepositoryDb struct {
 
 func NewCustomerRepositoryDb() CustomerRepositoryDb {
 	// return CustomerRepositoryDb{client: dbClient}  dbClient *sql.DB
-	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.5:3306)/banking")
+	client, err := sqlx.Open("mysql", "root:oscar-camp-tutorial@tcp(192.168.205.6:3306)/banking")
 	if err != nil {
 		panic(err)
 	}
