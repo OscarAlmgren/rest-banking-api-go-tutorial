@@ -14,6 +14,8 @@ func NewSaleService(repositry domain.SaleRepository) DefaultSaleService {
 type SaleService interface {
 	FindOne() (*domain.Sale, error)
 	FindAll() ([]domain.Sale, error)
+	Create(domain.Sale) (string, error)
+	Delete(id string) (int64, error)
 }
 
 // Interface implementations from here.
@@ -31,4 +33,20 @@ func (s DefaultSaleService) FindAll() ([]domain.Sale, error) {
 		return nil, err
 	}
 	return sales, nil
+}
+
+func (s DefaultSaleService) Create(sale domain.Sale) (string, error) {
+	inserted, err := s.repo.Create(sale)
+	if err != nil {
+		return err.Error(), err
+	}
+	return inserted, nil
+}
+
+func (s DefaultSaleService) Delete(id string) (int64, error) {
+	deleted, err := s.repo.Delete(id)
+	if err != nil {
+		return -1, err
+	}
+	return deleted, nil
 }
