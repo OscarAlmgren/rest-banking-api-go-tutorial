@@ -2,17 +2,13 @@ package app
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v5"
 	"github.com/oscaralmgren/rest-banking-api-go-tutorial/service"
 )
 
 // DTO (data transformation object)
-type Customer struct {
-	Name    string `json:"name" xml:"name" form:"name" query:"name"`
-	City    string `json:"city"`
-	Zipcode string `json:"zipcode"`
-}
 
 type CustomerHandler struct {
 	service service.CustomerService
@@ -47,7 +43,18 @@ func (ch *CustomerHandler) getCustomerById(c echo.Context) error {
 	return c.JSON(http.StatusOK, customer)
 }
 
+// e.DELETE("/customers/:id", deleteCustomerById)
+func (ch *CustomerHandler) deleteCustomerById(c echo.Context) error {
+	id := c.PathParam("id")
+	rowsAffected, err := ch.service.DeleteCustomerById(id)
+	if err != nil {
+		return err
+	}
+	return c.String(http.StatusAccepted, "Rows affected:"+strconv.Itoa(int(rowsAffected)))
+
+}
+
 // e.POST("/customers", createCustomer)
-func createCustomer(c echo.Context) error {
+func (ch *CustomerHandler) create(c echo.Context) error {
 	return c.String(http.StatusCreated, "Post create customer")
 }
