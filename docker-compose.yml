@@ -24,7 +24,6 @@ services:
   mongo:
     image: mongo:6.0.4-jammy
     container_name: mongodb-banking
-    restart: always
     ports:
       - "27017:27017"
     environment:
